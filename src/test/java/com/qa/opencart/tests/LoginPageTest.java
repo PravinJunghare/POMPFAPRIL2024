@@ -1,35 +1,39 @@
 package com.qa.opencart.tests;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.qa.opencart.base.BaseTest;
 
 public class LoginPageTest extends BaseTest {
 
-	@Test
+	@Test(priority = 1)
 	public void loginPageTitleTest()
 	{
 		String actualTitle=loginPage.getLoginPageTitle();
 		org.testng.Assert.assertEquals(actualTitle,"Account Login");
 	}
-	@Test
+	@Test(priority = 2)
 	public void loginPageUrlTest()
 	{
 		String actualUrl=loginPage.getLoginUrl();
 		org.testng.Assert.assertTrue(actualUrl.contains("route=account/login"));
 	}
 	
-	@Test
+	@Test(priority = 3)
 	public void forgortPasswordLinkTest()
 	{
-		org.testng.Assert.assertTrue(loginPage.isForgotPasswordlinkExits());
+		Assert.assertTrue(loginPage.isForgotPasswordlinkExits());
 	}
 	
 	
-	@Test
+	@Test(priority = 4)
 	public void loginTest()
 	{
-		loginPage.doLogin("pravinjunghare01@yahoo.com", "Test@1234");
+		accountsPage= loginPage.doLogin("pravinjunghare01@gmail.com", "Test@1234");
+		Assert.assertTrue( accountsPage.isLogoutLinkExist());
+		
+		
 	}
 	
 	
